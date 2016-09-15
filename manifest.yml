@@ -1,0 +1,10 @@
+---
+applications:
+- name:
+  host:
+  domain: eu-gb.mybluemix.net
+  memory: 256M
+  instances: 1
+  path: .
+  services:
+    - Tone Analyzer

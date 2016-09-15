@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body {
+  font: 10px sans-serif;
+}
+
+svg text{
+  text-anchor:middle;
+  font-size:18px;
+}
+svg .values text{
+  pointer-events:none;
+  stroke-width: 0.5px;
+}
+.groups:hover{
+  cursor:pointer;
+  font-weight:bold;
+}
+
+</style>
+<body>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="http://vizjs.org/viz.v1.1.2.min.js"></script>
+<script>
+
+var width=960, height=960
+	,outerRadius = Math.min(width, height) * 0.5 - 40
+    ,innerRadius = outerRadius - 30;
+
+var m = [{{array}}, {{array2}}, {{array3}}, {{array4}}];
+//turn matrix into table
+var data=[];
+m.forEach(function(r,i){ r.forEach(function(c,j){ data.push([i,j,c])})});
+
+//var colors = ["#000000", "#FFDD89", "#957244", "#F26223", "#A43434"];
+var colors = ["#0F9550", "#9819C2", "#E1DA53", "#F26214", "#7A7A7A"];
+
+var ch = viz.ch().data(data).padding(.05)
+	  	  .innerRadius(innerRadius)
+	  	  .outerRadius(outerRadius)
+	  	  .label(function(d){ return ""})
+	  	  .startAngle(1.5*Math.PI)
+	  	  .fill(function(d){ return colors[d];});
+
+var svg = d3.select("body").append("svg").attr("height",height).attr("width",width);
+
+svg.append("g").attr("transform", "translate("+width/2+","+height/2+")").call(ch);
+
+// adjust height of frame in bl.ocks.org
+d3.select(self.frameElement).style("height", height+"px").style("width", width+"px");
+
+</script>
